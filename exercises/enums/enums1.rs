@@ -1,11 +1,22 @@
 // enums1.rs
 // Make me compile! Execute `rustlings hint enums1` for hints!
 
-// I AM NOT DONE
+struct Celsius(i32);
+struct Fahrenheit(i32);
+struct Kelvin(u32);
+
+enum Degrees {
+    K(Kelvin),
+    F(Fahrenheit),
+    C(Celsius),
+}
 
 #[derive(Debug)]
 enum Message {
-    // TODO: define a few types of messages as used below
+    Quit,
+    Echo,
+    Move,
+    ChangeColor, // TODO: define a few types of messages as used below
 }
 
 fn main() {
