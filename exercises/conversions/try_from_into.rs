@@ -11,8 +11,6 @@ struct Color {
     blue: u8,
 }
 
-// I AM NOT DONE
-
 // Your task is to complete this implementation
 // and return an Ok result of inner type Color.
 // You need create implementation for a tuple of three integer,
@@ -27,9 +25,9 @@ impl TryFrom<(i16, i16, i16)> for Color {
     type Error = String;
     fn try_from(tuple: (i16, i16, i16)) -> Result<Self, Self::Error> {
         Ok(Color {
-            red: tuple.0 as u8,
-            green: tuple.1 as u8,
-            blue: tuple.2 as u8,
+            red: my_try(tuple.0)?,
+            green: my_try(tuple.1)?,
+            blue: my_try(tuple.2)?,
         })
     }
 }
@@ -39,11 +37,15 @@ impl TryFrom<[i16; 3]> for Color {
     type Error = String;
     fn try_from(arr: [i16; 3]) -> Result<Self, Self::Error> {
         Ok(Color {
-            red: arr[0] as u8,
-            green: arr[1] as u8,
-            blue: arr[2] as u8,
+            red: my_try(arr[0])?,
+            green: my_try(arr[1])?,
+            blue: my_try(arr[2])?,
         })
     }
+}
+
+fn my_try(input: i16) -> Result<u8, String> {
+    u8::try_from(input).map_err(|e| "".to_string())
 }
 
 // Slice implementation
@@ -54,9 +56,9 @@ impl TryFrom<&[i16]> for Color {
             return Err(String::from("Wrong size"));
         }
         Ok(Color {
-            red: slice[0] as u8,
-            green: slice[1] as u8,
-            blue: slice[2] as u8,
+            red: u8::try_from(slice[0]).map_err(|e| "".to_string())?,
+            green: u8::try_from(slice[1]).map_err(|e| "".to_string())?,
+            blue: u8::try_from(slice[2]).map_err(|e| "".to_string())?,
         })
     }
 }
